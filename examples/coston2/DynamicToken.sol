@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.6;
 
-import {IERC20Metadata} from "openzeppelin-contracts/token/ERC20/extensions/IERC20Metadata.sol";
+import {IERC20Metadata} from "openzeppelin-contracts/contractstoken/ERC20/extensions/IERC20Metadata.sol";
 import {IFtso} from "../../coston2/ftso/userInterfaces/IFtso.sol";
 import {IPriceSubmitter} from "../../coston2/ftso/userInterfaces/IPriceSubmitter.sol";
 import {IFtsoRegistry} from "../../coston2/ftso/userInterfaces/IFtsoRegistry.sol";
