@@ -1,46 +1,50 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.6 <0.9;
 
+/**
+ * Interface for contracts delegating their governance vote power.
+ */
 interface IGovernanceVotePower {
     /**
-     * @notice Delegate all governance vote power of `msg.sender` to `_to`.
-     * @param _to The address of the recipient
-     **/
+     * Delegates all governance vote power of `msg.sender` to address `_to`.
+     * @param _to The address of the recipient.
+     */
     function delegate(address _to) external;
 
     /**
-     * @notice Undelegate all governance vote power of `msg.sender``.
-     **/
+     * Undelegates all governance vote power of `msg.sender`.
+     */
     function undelegate() external;
 
     /**
-    * @notice Get the governance vote power of `_who` at block `_blockNumber`
-    * @param _who The address to get voting power.
-    * @param _blockNumber The block number at which to fetch.
-    * @return _votePower    Governance vote power of `_who` at `_blockNumber`.
-    */
+     * Gets the governance vote power of an address at a given block number, including
+     * all delegations made to it.
+     * @param _who The address being queried.
+     * @param _blockNumber The block number at which to fetch the vote power.
+     * @return Governance vote power of `_who` at `_blockNumber`.
+     */
     function votePowerOfAt(address _who, uint256 _blockNumber) external view returns(uint256);
 
     /**
-    * @notice Get the vote power of `account` at the current block.
-    * @param account The address to get voting power.
-    * @return Vote power of `account` at the current block number.
-    */    
-    function getVotes(address account) external view returns (uint256);
+     * Gets the governance vote power of an address at the latest block, including
+     * all delegations made to it.
+     * @param _who The address being queried.
+     * @return Governance vote power of `account` at the lastest block.
+     */
+    function getVotes(address _who) external view returns (uint256);
 
     /**
-    * @notice Get the delegate's address of `_who` at block `_blockNumber`
-    * @param _who The address to get delegate's address.
-    * @param _blockNumber The block number at which to fetch.
-    * @return Delegate's address of `_who` at `_blockNumber`.
-    */
+     * Gets the address an account is delegating its governance vote power to, at a given block number.
+     * @param _who The address being queried.
+     * @param _blockNumber The block number at which to fetch the address.
+     * @return Address where `_who` was delegating its governance vote power at block `_blockNumber`.
+     */
     function getDelegateOfAt(address _who, uint256 _blockNumber) external view returns (address);
 
     /**
-    * @notice Get the delegate's address of `_who` at the current block.
-    * @param _who The address to get delegate's address.
-    * @return Delegate's address of `_who` at the current block number.
-    */    
-    function getDelegateOfAtNow(address _who) external  view returns (address);
-
+     * Gets the address an account is delegating its governance vote power to, at the latest block number.
+     * @param _who The address being queried.
+     * @return Address where `_who` is currently delegating its governance vote power.
+     */
+    function getDelegateOfAtNow(address _who) external view returns (address);
 }
