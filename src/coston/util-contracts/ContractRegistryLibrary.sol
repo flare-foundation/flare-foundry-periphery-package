@@ -4,6 +4,12 @@ pragma solidity ^0.8.0;
 import {IFlareContractRegistry} from "./userInterfaces/IFlareContractRegistry.sol";
 // Auto generated imports
 // AUTO GENERATED - DO NOT EDIT BELOW THIS LINE
+import { IEVMTransactionVerification } from "../stateConnector/interface/IEVMTransactionVerification.sol";
+import { IAddressValidityVerification } from "../stateConnector/interface/IAddressValidityVerification.sol";
+import { IBalanceDecreasingTransactionVerification } from "../stateConnector/interface/IBalanceDecreasingTransactionVerification.sol";
+import { IConfirmedBlockHeightExistsVerification } from "../stateConnector/interface/IConfirmedBlockHeightExistsVerification.sol";
+import { IPaymentVerification } from "../stateConnector/interface/IPaymentVerification.sol";
+import { IReferencedPaymentNonexistenceVerification } from "../stateConnector/interface/IReferencedPaymentNonexistenceVerification.sol";
 import { IStateConnector } from "../stateConnector/interface/IStateConnector.sol";
 import { IPriceSubmitter } from "../ftso/userInterfaces/IPriceSubmitter.sol";
 import { IFtsoRewardManager } from "../ftso/userInterfaces/IFtsoRewardManager.sol";
@@ -74,7 +80,43 @@ library FlareContractsRegistryLibrary {
 
     // Nice typed getters for all the important contracts
     // AUTO GENERATED - DO NOT EDIT BELOW THIS LINE
-    function getStateConnector() internal view returns(IStateConnector){
+    function getIEVMTransactionVerification() internal view returns(IEVMTransactionVerification){
+return IEVMTransactionVerification(0x8b73B6d645bBA6d4EC1F88eD63d70a958eeb3A57);
+
+}
+
+
+function getIAddressValidityVerification() internal view returns(IAddressValidityVerification){
+return IAddressValidityVerification(0x67743178E5386c2f33b7f84249EcDDe5e15483BB);
+
+}
+
+
+function getIBalanceDecreasingTransactionVerification() internal view returns(IBalanceDecreasingTransactionVerification){
+return IBalanceDecreasingTransactionVerification(0xf702d044A4a28d89949170b4a4E7bDe441F48b20);
+
+}
+
+
+function getIConfirmedBlockHeightExistsVerification() internal view returns(IConfirmedBlockHeightExistsVerification){
+return IConfirmedBlockHeightExistsVerification(0x61002F9d4CCf8f21B5C04Fa2f3F1030B43C9300C);
+
+}
+
+
+function getIPaymentVerification() internal view returns(IPaymentVerification){
+return IPaymentVerification(0xA54bCF79B266179eAaC3CcA18f5d1FF6F67eff4e);
+
+}
+
+
+function getIReferencedPaymentNonexistenceVerification() internal view returns(IReferencedPaymentNonexistenceVerification){
+return IReferencedPaymentNonexistenceVerification(0xD104B8eF7C9a7d86A9b4BF10d52698eE9EC70938);
+
+}
+
+
+function getStateConnector() internal view returns(IStateConnector){
 return IStateConnector(FLARE_CONTRACT_REGISTRY.getContractAddressByName("StateConnector"));
 
 }

@@ -18,7 +18,7 @@ contract FlareContractRegistryMock is IFlareContractRegistry {
     // Taken directly form the contract registry on the real chain
     string[] public correctContractNames = [
         // AUTO GENERATED - DO NOT EDIT BELOW THIS LINE
-        ("WNat"), ("FlareAssetRegistry"), ("FtsoRegistry"), ("FlareDaemon"), ("GovernanceSettings"), ("FtsoRewardManager"), ("AddressUpdater"), ("Supply"), ("GovernanceVotePower"), ("InflationAllocation"), ("Inflation"), ("FlareContractRegistry"), ("CleanupBlockNumberManager"), ("FtsoManager"), ("PollingFtso"), ("PollingFoundation"), ("StateConnector"), ("VoterWhitelister"), ("PriceSubmitter"), ("ClaimSetupManager") 
+        ("FlareDaemon"), ("FtsoRewardManager"), ("Inflation"), ("FtsoManager"), ("ClaimSetupManager"), ("FlareAssetRegistry"), ("VoterWhitelister"), ("StateConnector"), ("PollingFtso"), ("WNat"), ("PollingFoundation"), ("FlareContractRegistry"), ("CleanupBlockNumberManager"), ("FtsoRegistry"), ("GovernanceVotePower"), ("InflationAllocation"), ("GovernanceSettings"), ("Supply"), ("PriceSubmitter"), ("AddressUpdater") 
         //END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
     ];
 
