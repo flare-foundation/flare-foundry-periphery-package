@@ -17,9 +17,9 @@ pragma solidity >=0.7.6 <0.9;
 interface TypeTemplate {
     /**
      * @notice Toplevel request
-     * @param attestationType Id of the attestation type.
-     * @param sourceId Id of the data source.
-     * @param messageIntegrityCode `MessageIntegrityCode` that is derived from the expected response as defined [here](/specs/attestations/hash-MIC.md#message-integrity-code).
+     * @param attestationType ID of the attestation type.
+     * @param sourceId ID of the data source.
+     * @param messageIntegrityCode `MessageIntegrityCode` that is derived from the expected response.
      * @param requestBody Data defining the request. Type (struct) and interpretation is determined by the `attestationType`.
      */
     struct Request {
@@ -33,7 +33,7 @@ interface TypeTemplate {
      * @notice Toplevel response
      * @param attestationType Extracted from the request.
      * @param sourceId Extracted from the request.
-     * @param votingRound The id of the state connector round in which the request was considered.
+     * @param votingRound The ID of the State Connector round in which the request was considered.
      * @param lowestUsedTimestamp The lowest timestamp used to generate the response.
      * @param requestBody Extracted from the request.
      * @param responseBody Data defining the response. The verification rules for the construction of the response body and the type are defined per specific `attestationType`.

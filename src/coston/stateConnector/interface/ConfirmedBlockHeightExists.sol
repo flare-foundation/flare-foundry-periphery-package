@@ -6,26 +6,32 @@ pragma solidity >=0.7.6 <0.9;
  * @custom:id 0x02
  * @custom:supported BTC, DOGE, XRP, testBTC, testDOGE, testXRP
  * @author Flare
- * @notice The intention of this attestation type is for a dapp to be able to see what is the confirmed height of an external chain and to calculate what is the block production (time wise) in a given time range.
- * @custom:verification For the given `blockNumber`, it is checked that the block is confirmed by at least `numberOfConfirmations`.
+ * @notice An assertion that a block with `blockNumber` is confirmed and data to compute the block production rate in the given time range.
+ * @custom:verification It is checked that the block with `blockNumber` is confirmed by at least `numberOfConfirmations`.
  * If it is not, the request is rejected. We note a block on the tip of the chain is confirmed by 1 block.
  * Then `lowestQueryWindowBlock` is determined and its number and timestamp are extracted.
  *
- * Current confirmation heights consensus:
  *
- * | `Chain` | `chainId` | `numberOfConfirmations` |
- * | ------- | --------- | ----------------------- |
- * | `BTC`   | 0         | 6                       |
- * | `DOGE`  | 2         | 60                      |
- * | `XRP`   | 3         | 3                       |
+ *  Current confirmation heights consensus:
+ *
+ *
+ * | `Chain` | `chainId` | `numberOfConfirmations` | `timestamp ` |
+ * | ------- | --------- | ----------------------- | ------------ |
+ * | `BTC`   | 0         | 6                       | mediantime   |
+ * | `DOGE`  | 2         | 60                      | mediantime   |
+ * | `XRP`   | 3         | 3                       | close_time   |
+ *
+ *
+ *
+ *
  * @custom:lut `lowestQueryWindowBlockTimestamp`
  */
 interface ConfirmedBlockHeightExists {
     /**
      * @notice Toplevel request
-     * @param attestationType Id of the attestation type.
-     * @param sourceId Id of the data source.
-     * @param messageIntegrityCode `MessageIntegrityCode` that is derived from the expected response as defined [here](/specs/attestations/hash-MIC.md#message-integrity-code).
+     * @param attestationType ID of the attestation type.
+     * @param sourceId ID of the data source.
+     * @param messageIntegrityCode `MessageIntegrityCode` that is derived from the expected response as defined.
      * @param requestBody Data defining the request. Type (struct) and interpretation is determined by the `attestationType`.
      */
     struct Request {
@@ -39,7 +45,7 @@ interface ConfirmedBlockHeightExists {
      * @notice Toplevel response
      * @param attestationType Extracted from the request.
      * @param sourceId Extracted from the request.
-     * @param votingRound The id of the state connector round in which the request was considered.
+     * @param votingRound The ID of the State Connector round in which the request was considered.
      * @param lowestUsedTimestamp The lowest timestamp used to generate the response.
      * @param requestBody Extracted from the request.
      * @param responseBody Data defining the response. The verification rules for the construction of the response body and the type are defined per specific `attestationType`.
@@ -66,7 +72,7 @@ interface ConfirmedBlockHeightExists {
     /**
      * @notice Request body for ConfirmedBlockHeightExistsType attestation type
      * @param blockNumber The number of the block the request wants a confirmation of.
-     * @param queryWindow The period in seconds for sampling. The range is from `blockNumber` to the blockNumber of the first block more than queryWindow before the `blockNumber`.
+     * @param queryWindow The length of the period in which the block production rate is to be computed.
      */
     struct RequestBody {
         uint64 blockNumber;
@@ -77,7 +83,7 @@ interface ConfirmedBlockHeightExists {
      * @notice Response body for ConfirmedBlockHeightExistsType attestation type
      * @custom:below `blockNumber`, `lowestQueryWindowBlockNumber`, `blockTimestamp` and `lowestQueryWindowBlockTimestamp` can be used to compute the average block production time in the specified block range.
      * @param blockTimestamp The timestamp of the block with `blockNumber`.
-     * @param numberOfConfirmations The depth at which a block is considered confirmed depending on the chain. All attestation clients must agree on this number.
+     * @param numberOfConfirmations The depth at which a block is considered confirmed depending on the chain. All attestation providers must agree on this number.
      * @param lowestQueryWindowBlockNumber The block number of the latest block that has a timestamp strictly smaller than `blockTimestamp` - `queryWindow`.
      * @param lowestQueryWindowBlockTimestamp The timestamp of the block at height `lowestQueryWindowBlockNumber`.
      */
