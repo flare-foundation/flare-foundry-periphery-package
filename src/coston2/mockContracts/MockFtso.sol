@@ -256,4 +256,11 @@ contract MockFtso is IIFtso {
     {}
 
     function wNat() external view override returns (IIVPToken) {}
+
+    function ASSET_PRICE_USD_DECIMALS()
+        external
+        view
+        override
+        returns (uint256)
+    {}
 }

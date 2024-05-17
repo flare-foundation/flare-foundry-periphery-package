@@ -93,26 +93,17 @@ contract MockFtso is IIFtso {
 
     function getCurrentEpochId() external view override returns (uint256) {}
 
-    function getEpochId(uint256 _timestamp)
-        external
-        view
-        override
-        returns (uint256)
-    {}
+    function getEpochId(
+        uint256 _timestamp
+    ) external view override returns (uint256) {}
 
-    function getRandom(uint256 _epochId)
-        external
-        view
-        override
-        returns (uint256)
-    {}
+    function getRandom(
+        uint256 _epochId
+    ) external view override returns (uint256) {}
 
-    function getEpochPrice(uint256 _epochId)
-        external
-        view
-        override
-        returns (uint256)
-    {}
+    function getEpochPrice(
+        uint256 _epochId
+    ) external view override returns (uint256) {}
 
     function getPriceEpochData()
         external
@@ -138,12 +129,10 @@ contract MockFtso is IIFtso {
         )
     {}
 
-    function getEpochPriceForVoter(uint256 _epochId, address _voter)
-        external
-        view
-        override
-        returns (uint256)
-    {}
+    function getEpochPriceForVoter(
+        uint256 _epochId,
+        address _voter
+    ) external view override returns (uint256) {}
 
     function getCurrentPriceDetails()
         external
@@ -176,15 +165,17 @@ contract MockFtso is IIFtso {
         bytes32 _hash
     ) external override {}
 
-    function wNatVotePowerCached(address _voter, uint256 _epochId)
-        external
-        override
-        returns (uint256)
-    {}
+    function wNatVotePowerCached(
+        address _voter,
+        uint256 _epochId
+    ) external override returns (uint256) {}
 
     // IIFtso
 
-    function finalizePriceEpoch(uint256 _epochId, bool _returnRewardData)
+    function finalizePriceEpoch(
+        uint256 _epochId,
+        bool _returnRewardData
+    )
         external
         override
         returns (
@@ -272,4 +263,11 @@ contract MockFtso is IIFtso {
     {}
 
     function wNat() external view override returns (IIVPToken) {}
+
+    function ASSET_PRICE_USD_DECIMALS()
+        external
+        view
+        override
+        returns (uint256)
+    {}
 }

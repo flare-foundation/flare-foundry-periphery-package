@@ -5,9 +5,7 @@ import "../../genesis/interface/IFtsoGenesis.sol";
 import "../../userInterfaces/IFtso.sol";
 import "../../../util-contracts/token/token/interface/IIVPToken.sol";
 
-
 interface IIFtso is IFtso, IFtsoGenesis {
-
     /// function finalizePriceReveal
     /// called by reward manager only on correct timing.
     /// if price reveal period for epoch x ended. finalize.
@@ -15,8 +13,12 @@ interface IIFtso is IFtso, IFtsoGenesis {
     /// find weighted median
     /// find adjucant 50% of price submissions.
     /// Allocate reward for any price submission which is same as a "winning" submission
-    function finalizePriceEpoch(uint256 _epochId, bool _returnRewardData) external
-        returns(
+    function finalizePriceEpoch(
+        uint256 _epochId,
+        bool _returnRewardData
+    )
+        external
+        returns (
             address[] memory _eligibleAddresses,
             uint256[] memory _natWeights,
             uint256 _totalNatWeight
@@ -26,7 +28,7 @@ interface IIFtso is IFtso, IFtsoGenesis {
 
     function forceFinalizePriceEpoch(uint256 _epochId) external;
 
-    // activateFtso will be called by ftso manager once ftso is added 
+    // activateFtso will be called by ftso manager once ftso is added
     // before this is done, FTSO can't run
     function activateFtso(
         uint256 _firstEpochStartTs,
@@ -37,7 +39,10 @@ interface IIFtso is IFtso, IFtsoGenesis {
     function deactivateFtso() external;
 
     // update initial price and timestamp - only if not active
-    function updateInitialPrice(uint256 _initialPriceUSD, uint256 _initialPriceTimestamp) external;
+    function updateInitialPrice(
+        uint256 _initialPriceUSD,
+        uint256 _initialPriceTimestamp
+    ) external;
 
     function configureEpochs(
         uint256 _maxVotePowerNatThresholdFraction,
@@ -55,13 +60,16 @@ interface IIFtso is IFtso, IFtsoGenesis {
 
     function setAssetFtsos(IIFtso[] memory _assetFtsos) external;
 
-    // current vote power block will update per reward epoch. 
+    // current vote power block will update per reward epoch.
     // the FTSO doesn't have notion of reward epochs.
-    // reward manager only can set this data. 
+    // reward manager only can set this data.
     function setVotePowerBlock(uint256 _blockNumber) external;
 
-    function initializeCurrentEpochStateForReveal(uint256 _circulatingSupplyNat, bool _fallbackMode) external;
-  
+    function initializeCurrentEpochStateForReveal(
+        uint256 _circulatingSupplyNat,
+        bool _fallbackMode
+    ) external;
+
     /**
      * @notice Returns ftso manager address
      */
@@ -93,7 +101,9 @@ interface IIFtso is IFtso, IFtsoGenesis {
      * @return _elasticBandWidthPPM             Prices within _elasticBandWidthPPM of median are rewarded
      * @return _trustedAddresses                Trusted addresses - use their prices if low nat turnout is not achieved
      */
-    function epochsConfiguration() external view 
+    function epochsConfiguration()
+        external
+        view
         returns (
             uint256 _maxVotePowerNatThresholdFraction,
             uint256 _maxVotePowerAssetThresholdFraction,
@@ -115,7 +125,9 @@ interface IIFtso is IFtso, IFtsoGenesis {
      * @return _assetWeightRatio        ratio of combined asset vp vs. native token vp (in BIPS)
      * @return _votePowerBlock          vote powewr block for given epoch
      */
-    function getVoteWeightingParameters() external view 
+    function getVoteWeightingParameters()
+        external
+        view
         returns (
             IIVPToken[] memory _assets,
             uint256[] memory _assetMultipliers,
@@ -126,4 +138,10 @@ interface IIFtso is IFtso, IFtsoGenesis {
         );
 
     function wNat() external view returns (IIVPToken);
+
+    /** Number of decimal places in an asset's USD price.
+     * Actual USD price is the integer value divided by 10^`ASSET_PRICE_USD_DECIMALS`
+     */
+    // solhint-disable-next-line var-name-mixedcase
+    function ASSET_PRICE_USD_DECIMALS() external view returns (uint256);
 }
