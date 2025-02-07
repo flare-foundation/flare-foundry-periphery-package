@@ -49,6 +49,7 @@ import {RewardsV2Interface} from "./RewardsV2Interface.sol";
 import {IFdcVerification} from "./IFdcVerification.sol";
 import {IFdcHub} from "./IFdcHub.sol";
 import {IFdcRequestFeeConfigurations} from "./IFdcRequestFeeConfigurations.sol";
+import {IJsonApiVerification} from "./IJsonApiVerification.sol";
 // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
 
 // Library is intended to be used inline, so the strings are all memory allocated (instead of calldata)
@@ -574,6 +575,15 @@ library ContractRegistry {
                     keccak256(abi.encode("FdcRequestFeeConfigurations"))
                 )
             );
+    }
+
+    // Returns hardcoded unofficial deployment instances of Flare core contracts
+    function auxiliaryGetIJsonApiVerification()
+        internal
+        pure
+        returns (IJsonApiVerification)
+    {
+        return IJsonApiVerification(0x07ad8508C9173DC845817472Ca0484035AbFA3c8);
     }
 
     // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
