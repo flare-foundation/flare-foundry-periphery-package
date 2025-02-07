@@ -5,7 +5,6 @@ import {IFlareContractRegistry} from "./IFlareContractRegistry.sol";
 
 // Auto generated imports
 // AUTO GENERATED - DO NOT EDIT BELOW THIS LINE
-import {IStateConnector} from "./IStateConnector.sol";
 import {IPriceSubmitter} from "./IPriceSubmitter.sol";
 import {IGovernanceSettings} from "./IGovernanceSettings.sol";
 import {IFtsoRewardManager} from "./IFtsoRewardManager.sol";
@@ -17,7 +16,6 @@ import {IGovernanceVotePower} from "./IGovernanceVotePower.sol";
 import {IClaimSetupManager} from "./IClaimSetupManager.sol";
 import {IFlareAssetRegistry} from "./IFlareAssetRegistry.sol";
 import {IFlareContractRegistry} from "./IFlareContractRegistry.sol";
-import {IPollingFtso} from "./IPollingFtso.sol";
 import {ISubmission} from "./ISubmission.sol";
 import {IEntityManager} from "./IEntityManager.sol";
 import {IVoterRegistry} from "./IVoterRegistry.sol";
@@ -40,12 +38,9 @@ import {TestFtsoV2Interface} from "./TestFtsoV2Interface.sol";
 import {ProtocolsV2Interface} from "./ProtocolsV2Interface.sol";
 import {RandomNumberV2Interface} from "./RandomNumberV2Interface.sol";
 import {RewardsV2Interface} from "./RewardsV2Interface.sol";
-import {IEVMTransactionVerification} from "./IEVMTransactionVerification.sol";
-import {IAddressValidityVerification} from "./IAddressValidityVerification.sol";
-import {IBalanceDecreasingTransactionVerification} from "./IBalanceDecreasingTransactionVerification.sol";
-import {IConfirmedBlockHeightExistsVerification} from "./IConfirmedBlockHeightExistsVerification.sol";
-import {IPaymentVerification} from "./IPaymentVerification.sol";
-import {IReferencedPaymentNonexistenceVerification} from "./IReferencedPaymentNonexistenceVerification.sol";
+import {IFdcVerification} from "./IFdcVerification.sol";
+import {IFdcHub} from "./IFdcHub.sol";
+import {IFdcRequestFeeConfigurations} from "./IFdcRequestFeeConfigurations.sol";
 // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
 
 // Library is intended to be used inline, so the strings are all memory allocated (instead of calldata)
@@ -109,15 +104,6 @@ library ContractRegistry {
 
     // Nice typed getters for all the important contracts
     // AUTO GENERATED - DO NOT EDIT BELOW THIS LINE
-    function getStateConnector() internal view returns (IStateConnector) {
-        return
-            IStateConnector(
-                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("StateConnector"))
-                )
-            );
-    }
-
     function getPriceSubmitter() internal view returns (IPriceSubmitter) {
         return
             IPriceSubmitter(
@@ -229,15 +215,6 @@ library ContractRegistry {
             IFlareContractRegistry(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
                     keccak256(abi.encode("FlareContractRegistry"))
-                )
-            );
-    }
-
-    function getPollingFtso() internal view returns (IPollingFtso) {
-        return
-            IPollingFtso(
-                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("PollingFtso"))
                 )
             );
     }
@@ -472,72 +449,34 @@ library ContractRegistry {
             );
     }
 
-    // Returns hardcoded unofficial deployment instances of Flare core contracts
-    function auxiliaryGetIEVMTransactionVerification()
-        internal
-        pure
-        returns (IEVMTransactionVerification)
-    {
+    function getFdcVerification() internal view returns (IFdcVerification) {
         return
-            IEVMTransactionVerification(
-                0xf37AD1278917c04fb291C75a42e61710964Cb57c
+            IFdcVerification(
+                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
+                    keccak256(abi.encode("FdcVerification"))
+                )
             );
     }
 
-    // Returns hardcoded unofficial deployment instances of Flare core contracts
-    function auxiliaryGetIAddressValidityVerification()
-        internal
-        pure
-        returns (IAddressValidityVerification)
-    {
+    function getFdcHub() internal view returns (IFdcHub) {
         return
-            IAddressValidityVerification(
-                0xd94721da1dD5e222020D256fC073e8Be301ebdCB
+            IFdcHub(
+                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
+                    keccak256(abi.encode("FdcHub"))
+                )
             );
     }
 
-    // Returns hardcoded unofficial deployment instances of Flare core contracts
-    function auxiliaryGetIBalanceDecreasingTransactionVerification()
+    function getFdcRequestFeeConfigurations()
         internal
-        pure
-        returns (IBalanceDecreasingTransactionVerification)
+        view
+        returns (IFdcRequestFeeConfigurations)
     {
         return
-            IBalanceDecreasingTransactionVerification(
-                0xeDa84A2eeDfdA53e7c33ef5fDe7B2798B910BF4A
-            );
-    }
-
-    // Returns hardcoded unofficial deployment instances of Flare core contracts
-    function auxiliaryGetIConfirmedBlockHeightExistsVerification()
-        internal
-        pure
-        returns (IConfirmedBlockHeightExistsVerification)
-    {
-        return
-            IConfirmedBlockHeightExistsVerification(
-                0x632A984d63f9Ae3C2Eb31e0dc2EeEaE1E282E0da
-            );
-    }
-
-    // Returns hardcoded unofficial deployment instances of Flare core contracts
-    function auxiliaryGetIPaymentVerification()
-        internal
-        pure
-        returns (IPaymentVerification)
-    {
-        return IPaymentVerification(0x1ECe6dd08D19c0faf3AB8cEcB146cd5ea5b9b7d9);
-    }
-
-    // Returns hardcoded unofficial deployment instances of Flare core contracts
-    function auxiliaryGetIReferencedPaymentNonexistenceVerification()
-        internal
-        pure
-        returns (IReferencedPaymentNonexistenceVerification)
-    {
-        return
-            IReferencedPaymentNonexistenceVerification(
-                0xDfE5926fABA166187B29C33BC95DfDb18bbE52cd
+            IFdcRequestFeeConfigurations(
+                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
+                    keccak256(abi.encode("FdcRequestFeeConfigurations"))
+                )
             );
     }
 

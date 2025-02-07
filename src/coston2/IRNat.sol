@@ -3,7 +3,7 @@ pragma solidity >=0.7.6 <0.9;
 
 import "./IRNatAccount.sol";
 import "./IWNat.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
+import "@openzeppelin-contracts/token/ERC20/extensions/IERC20Metadata.sol";
 
 interface IRNat is IERC20Metadata {
 
