@@ -42,6 +42,7 @@ import {IFdcVerification} from "./IFdcVerification.sol";
 import {IFdcHub} from "./IFdcHub.sol";
 import {IFdcRequestFeeConfigurations} from "./IFdcRequestFeeConfigurations.sol";
 import {IJsonApiVerification} from "./IJsonApiVerification.sol";
+import {IWeb2JsonVerification} from "./IWeb2JsonVerification.sol";
 // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
 
 // Library is intended to be used inline, so the strings are all memory allocated (instead of calldata)
@@ -488,6 +489,16 @@ library ContractRegistry {
         returns (IJsonApiVerification)
     {
         return IJsonApiVerification(0x206D83e3a24523De1E43Ab56AC8f7b9b10f6ab89);
+    }
+
+    // Returns hardcoded unofficial deployment instances of Flare core contracts
+    function auxiliaryGetIWeb2JsonVerification()
+        internal
+        pure
+        returns (IWeb2JsonVerification)
+    {
+        return
+            IWeb2JsonVerification(0x30DAB57c409E1e18c8B00dC351Bf568953D607B1);
     }
 
     // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
