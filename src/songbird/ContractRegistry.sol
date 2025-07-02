@@ -41,6 +41,7 @@ import {RewardsV2Interface} from "./RewardsV2Interface.sol";
 import {IFdcVerification} from "./IFdcVerification.sol";
 import {IFdcHub} from "./IFdcHub.sol";
 import {IFdcRequestFeeConfigurations} from "./IFdcRequestFeeConfigurations.sol";
+import {IAssetManagerController} from "./IAssetManagerController.sol";
 // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
 
 // Library is intended to be used inline, so the strings are all memory allocated (instead of calldata)
@@ -476,6 +477,19 @@ library ContractRegistry {
             IFdcRequestFeeConfigurations(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
                     keccak256(abi.encode("FdcRequestFeeConfigurations"))
+                )
+            );
+    }
+
+    function getAssetManagerController()
+        internal
+        view
+        returns (IAssetManagerController)
+    {
+        return
+            IAssetManagerController(
+                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
+                    keccak256(abi.encode("AssetManagerController"))
                 )
             );
     }

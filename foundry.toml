@@ -1,6 +1,6 @@
 [package]
 name = "flare-periphery"
-version = "0.0.24"
+version = "0.0.29"
 
 [profile.default]
 src = "src"

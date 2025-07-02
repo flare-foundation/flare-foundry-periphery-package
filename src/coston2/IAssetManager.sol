@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.6 <0.9;
 
-import "./IFdcVerification.sol";
+import ".//IFdcVerification.sol";
 import "@openzeppelin-contracts/utils/introspection/IERC165.sol";
 import "./diamond/interfaces/IDiamondLoupe.sol";
 import "./userInterfaces/data/AssetManagerSettings.sol";
@@ -629,7 +629,8 @@ interface IAssetManager is
         uint256 _maxMintingFeeBIPS,
         address payable _executor,
         string[] calldata _minterUnderlyingAddresses
-    ) external payable;
+    ) external payable
+        returns (uint256 _collateralReservationId);
 
     /**
      * Agent approves the collateral reservation request after checking the minter's identity.
