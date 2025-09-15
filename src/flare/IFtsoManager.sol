@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.6 <0.9;
 
-import "./ftso/interface/IIFtso.sol";
-import "./genesis/interface/IFtsoManagerGenesis.sol";
+import "./ftso/interfaces/IIFtso.sol";
+import "./genesis/interfaces/IFtsoManagerGenesis.sol";
 
 interface IFtsoManager is IFtsoManagerGenesis {
 
