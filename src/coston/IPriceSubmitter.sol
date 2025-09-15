@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.6 <0.9;
 
-import "./genesis/interface/IFtsoGenesis.sol";
-import "./genesis/interface/IFtsoRegistryGenesis.sol";
+import "./genesis/interfaces/IFtsoGenesis.sol";
+import "./genesis/interfaces/IFtsoRegistryGenesis.sol";
 
 interface IPriceSubmitter {
     /**

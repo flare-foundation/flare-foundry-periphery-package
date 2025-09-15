@@ -80,7 +80,6 @@ Very simple contract that can consume the FTSO prices is shown in `examples/netw
 An example usage of the FTSO system to dynamically price token in a contract is showcased in
 `examples/network/DynamicToken.sol` with a more detailed explanation in the [blogpost](https://medium.com/@j0-0sko/taking-it-up-to-11-74dd91c39c2b).
 
-
 ### I want to confirm something using the attestation client
 
 Coming soon.

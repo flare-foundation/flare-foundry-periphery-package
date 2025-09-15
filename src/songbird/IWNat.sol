@@ -1,42 +1,34 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.6 <0.9;
 
-import "./IVPToken.sol";
-import "./token/interface/IICleanable.sol";
-
-
-/**
- * @title Wrapped Native token
- * Accept native token deposits and mint ERC20 WNAT (wrapped native) tokens 1-1.
- */
-interface IWNat is IVPToken, IICleanable {
+interface IWNat {
     /**
-     * Deposit Native and mint wNat ERC20.
+     * @notice Deposit native token and mint WNAT ERC20.
      */
     function deposit() external payable;
 
     /**
-     * Deposit Native from msg.sender and mints WNAT ERC20 to recipient address.
-     * @param recipient An address to receive minted WNAT.
+     * @notice Withdraw native token and burn WNAT ERC20.
+     * @param _amount The amount to withdraw.
      */
-    function depositTo(address recipient) external payable;
-
+    function withdraw(uint256 _amount) external;
+    
     /**
-     * Withdraw Native and burn WNAT ERC20.
-     * @param amount The amount to withdraw.
+     * @notice Deposit native token from msg.sender and mint WNAT ERC20.
+     * @param _recipient An address to receive minted WNAT.
      */
-    function withdraw(uint256 amount) external;
-
+    function depositTo(address _recipient) external payable;
+    
     /**
-     * Withdraw WNAT from an owner and send native tokens to msg.sender given an allowance.
-     * @param owner An address spending the Native tokens.
-     * @param amount The amount to spend.
+     * @notice Withdraw WNAT from an owner and send NAT to msg.sender given an allowance.
+     * @param _owner An address spending the native tokens.
+     * @param _amount The amount to spend.
      *
      * Requirements:
      *
-     * - `owner` must have a balance of at least `amount`.
-     * - the caller must have allowance for `owners`'s tokens of at least
-     * `amount`.
+     * - `_owner` must have a balance of at least `_amount`.
+     * - the caller must have allowance for `_owners`'s tokens of at least
+     * `_amount`.
      */
-    function withdrawFrom(address owner, uint256 amount) external;
+    function withdrawFrom(address _owner, uint256 _amount) external;
 }

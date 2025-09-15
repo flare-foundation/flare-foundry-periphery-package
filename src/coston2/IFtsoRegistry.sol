@@ -2,8 +2,8 @@
 pragma solidity >=0.7.6 <0.9;
 pragma abicoder v2;
 
-import "./ftso/interface/IIFtso.sol";
-import "./genesis/interface/IFtsoRegistryGenesis.sol";
+import "./ftso/interfaces/IIFtso.sol";
+import "./genesis/interfaces/IFtsoRegistryGenesis.sol";
 
 interface IFtsoRegistry is IFtsoRegistryGenesis {
 
