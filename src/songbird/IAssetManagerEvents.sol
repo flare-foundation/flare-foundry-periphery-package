@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.6 <0.9;
 
+import {EmergencyPause} from "./data/EmergencyPause.sol";
+
 
 /**
  * All asset manager events.
@@ -18,9 +20,7 @@ interface IAssetManagerEvents {
         uint256 mintingPoolCollateralRatioBIPS;
         uint256 buyFAssetByAgentFactorBIPS;
         uint256 poolExitCollateralRatioBIPS;
-        uint256 poolTopupCollateralRatioBIPS;
-        uint256 poolTopupTokenPriceFactorBIPS;
-        uint256 handshakeType;
+        uint256 redemptionPoolFeeShareBIPS;
     }
 
     /**
@@ -116,18 +116,6 @@ interface IAssetManagerEvents {
         address token);
 
     /**
-     * Minter reserved collateral, paid the reservation fee. Agent's collateral was reserved.
-     * Agent needs to approve or reject the reservation according to the minter's identity.
-     */
-    event HandshakeRequired(
-        address indexed agentVault,
-        address indexed minter,
-        uint256 indexed collateralReservationId,
-        string[] minterUnderlyingAddresses,
-        uint256 valueUBA,
-        uint256 feeUBA);
-
-    /**
      * Minter reserved collateral, paid the reservation fee, and is expected to pay the underlying funds.
      * Agent's collateral was reserved.
      */
@@ -144,24 +132,6 @@ interface IAssetManagerEvents {
         bytes32 paymentReference,
         address executor,
         uint256 executorFeeNatWei);
-
-    /**
-     * Agent rejected the collateral reservation request because of the minter's identity.
-     * Reserved collateral was released.
-     */
-    event CollateralReservationRejected(
-        address indexed agentVault,
-        address indexed minter,
-        uint256 indexed collateralReservationId);
-
-    /**
-     * Minter cancelled the collateral reservation request because of the agent's inactivity.
-     * Reserved collateral was released.
-     */
-    event CollateralReservationCancelled(
-        address indexed agentVault,
-        address indexed minter,
-        uint256 indexed collateralReservationId);
 
     /**
      * Minter paid underlying funds in time and received the fassets.
@@ -228,33 +198,12 @@ interface IAssetManagerEvents {
         uint256 executorFeeNatWei);
 
     /**
-     * Agent rejected the redemption request because of the redeemer's identity.
-     */
-    event RedemptionRequestRejected(
-        address indexed agentVault,
-        address indexed redeemer,
-        uint64 indexed requestId,
-        string paymentAddress,
-        uint256 valueUBA);
-
-    /**
-     * Agent's rejected redemption request was taken over by another agent.
-     */
-    event RedemptionRequestTakenOver(
-        address indexed agentVault,
-        address indexed redeemer,
-        uint64 indexed requestId,
-        uint256 valueTakenOverUBA,
-        address newAgentVault,
-        uint64 newRequestId);
-
-    /**
      * Agent rejected the redemption payment because the redeemer's address is invalid.
      */
     event RedemptionRejected(
         address indexed agentVault,
         address indexed redeemer,
-        uint64 indexed requestId,
+        uint256 indexed requestId,
         uint256 redemptionAmountUBA);
 
     /**
@@ -273,7 +222,7 @@ interface IAssetManagerEvents {
     event RedemptionPerformed(
         address indexed agentVault,
         address indexed redeemer,
-        uint64 indexed requestId,
+        uint256 indexed requestId,
         bytes32 transactionHash,
         uint256 redemptionAmountUBA,
         int256 spentUnderlyingUBA);
@@ -288,7 +237,7 @@ interface IAssetManagerEvents {
     event RedemptionDefault(
         address indexed agentVault,
         address indexed redeemer,
-        uint64 indexed requestId,
+        uint256 indexed requestId,
         uint256 redemptionAmountUBA,
         uint256 redeemedVaultCollateralWei,
         uint256 redeemedPoolCollateralWei);
@@ -302,7 +251,7 @@ interface IAssetManagerEvents {
     event RedemptionPaymentBlocked(
         address indexed agentVault,
         address indexed redeemer,
-        uint64 indexed requestId,
+        uint256 indexed requestId,
         bytes32 transactionHash,
         uint256 redemptionAmountUBA,
         int256 spentUnderlyingUBA);
@@ -314,7 +263,7 @@ interface IAssetManagerEvents {
     event RedemptionPaymentFailed(
         address indexed agentVault,
         address indexed redeemer,
-        uint64 indexed requestId,
+        uint256 indexed requestId,
         bytes32 transactionHash,
         int256 spentUnderlyingUBA,
         string failureReason);
@@ -325,7 +274,7 @@ interface IAssetManagerEvents {
      */
     event RedemptionPoolFeeMinted(
         address indexed agentVault,
-        uint64 indexed requestId,
+        uint256 indexed requestId,
         uint256 poolFeeUBA);
 
     /**
@@ -370,6 +319,15 @@ interface IAssetManagerEvents {
         uint256 indexed redemptionTicketId);
 
     /**
+     * Method `consolidateSmallTickets` has finished.
+     * @param firstTicketId first handled ticket id (different from the method param _firstTicketId if it was 0).
+     * @param nextTicketId the first remaining (not handled) ticket id, or 0 if the end of queue was reached.
+     */
+    event RedemptionTicketsConsolidated(
+        uint256 firstTicketId,
+        uint256 nextTicketId);
+
+    /**
      * Due to lot size change, some dust was created for this agent during
      * redemption. Value `dustUBA` is the new amount of dust. Dust cannot be directly redeemed,
      * but it can be self-closed or liquidated and if it accumulates to more than 1 lot,
@@ -378,14 +336,6 @@ interface IAssetManagerEvents {
     event DustChanged(
         address indexed agentVault,
         uint256 dustUBA);
-
-    /**
-     * Agent entered CCB (collateral call band) due to being on the border of unhealthy.
-     * Agent has limited time to topup the collateral, otherwise liquidation starts.
-     */
-    event AgentInCCB(
-        address indexed agentVault,
-        uint256 timestamp);
 
     /**
      * Agent entered liquidation state due to unhealthy position.
@@ -434,7 +384,7 @@ interface IAssetManagerEvents {
      */
     event UnderlyingWithdrawalAnnounced(
         address indexed agentVault,
-        uint64 indexed announcementId,
+        uint256 indexed announcementId,
         bytes32 paymentReference);
 
     /**
@@ -445,7 +395,7 @@ interface IAssetManagerEvents {
      */
     event UnderlyingWithdrawalConfirmed(
         address indexed agentVault,
-        uint64 indexed announcementId,
+        uint256 indexed announcementId,
         int256 spentUBA,
         bytes32 transactionHash);
 
@@ -456,7 +406,7 @@ interface IAssetManagerEvents {
      */
     event UnderlyingWithdrawalCancelled(
         address indexed agentVault,
-        uint64 indexed announcementId);
+        uint256 indexed announcementId);
 
     /**
      * Emitted when the agent tops up the underlying address balance.
@@ -542,47 +492,28 @@ interface IAssetManagerEvents {
         string assetFtsoSymbol,
         string tokenFtsoSymbol,
         uint256 minCollateralRatioBIPS,
-        uint256 ccbMinCollateralRatioBIPS,
         uint256 safetyMinCollateralRatioBIPS);
 
     /**
-     * System defined collateral ratios for the token have changed (minimal, CCB and safety collateral ratio).
+     * System defined collateral ratios for the token have changed (minimal and safety collateral ratio).
      */
     event CollateralRatiosChanged(
         uint8 collateralClass,
         address collateralToken,
         uint256 minCollateralRatioBIPS,
-        uint256 ccbMinCollateralRatioBIPS,
         uint256 safetyMinCollateralRatioBIPS);
-
-    /**
-     * Collateral token has been marked as deprecated. After the timestamp `validUntil` passes, it will be
-     * considered invalid and the agents who haven't switched their collateral before will be liquidated.
-     */
-    event CollateralTypeDeprecated(
-        uint8 collateralClass,
-        address collateralToken,
-        uint256 validUntil);
 
     /**
      * Emergency pause was triggered.
      */
     event EmergencyPauseTriggered(
-        uint256 pausedUntil);
+        EmergencyPause.Level externalLevel,
+        uint256 externalPausedUntil,
+        EmergencyPause.Level governanceLevel,
+        uint256 governancePausedUntil);
 
     /**
      * Emergency pause was canceled.
      */
     event EmergencyPauseCanceled();
-
-    /**
-     * Emergency pause transfers was triggered.
-     */
-    event EmergencyPauseTransfersTriggered(
-        uint256 pausedUntil);
-
-    /**
-     * Emergency pause transfers was canceled.
-     */
-    event EmergencyPauseTransfersCanceled();
 }
