@@ -1,56 +1,48 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.25;
 
-import {IFlareContractRegistry} from "./IFlareContractRegistry.sol";
-
-// Auto generated imports
+import { IFlareContractRegistry } from "./IFlareContractRegistry.sol";
 // AUTO GENERATED - DO NOT EDIT BELOW THIS LINE
-import {IPriceSubmitter} from "./IPriceSubmitter.sol";
-import {IGovernanceSettings} from "./IGovernanceSettings.sol";
-import {IFtsoRewardManager} from "./IFtsoRewardManager.sol";
-import {IFtsoRegistry} from "./IFtsoRegistry.sol";
-import {IVoterWhitelister} from "./IVoterWhitelister.sol";
-import {IDistributionToDelegators} from "./IDistributionToDelegators.sol";
-import {IFtsoManager} from "./IFtsoManager.sol";
-import {IWNat} from "./IWNat.sol";
-import {IGovernanceVotePower} from "./IGovernanceVotePower.sol";
-import {IClaimSetupManager} from "./IClaimSetupManager.sol";
-import {IGenericRewardManager} from "./IGenericRewardManager.sol";
-import {IFlareAssetRegistry} from "./IFlareAssetRegistry.sol";
-import {IValidatorRegistry} from "./IValidatorRegistry.sol";
-import {IFlareContractRegistry} from "./IFlareContractRegistry.sol";
-import {IAddressBinder} from "./IAddressBinder.sol";
-import {IPChainStakeMirror} from "./IPChainStakeMirror.sol";
-import {IPChainStakeMirrorVerifier} from "./IPChainStakeMirrorVerifier.sol";
-import {IPChainStakeMirrorMultiSigVoting} from "./IPChainStakeMirrorMultiSigVoting.sol";
-import {ISubmission} from "./ISubmission.sol";
-import {IEntityManager} from "./IEntityManager.sol";
-import {IVoterRegistry} from "./IVoterRegistry.sol";
-import {IFlareSystemsCalculator} from "./IFlareSystemsCalculator.sol";
-import {IFlareSystemsManager} from "./IFlareSystemsManager.sol";
-import {IRewardManager} from "./IRewardManager.sol";
-import {IRelay} from "./IRelay.sol";
-import {IWNatDelegationFee} from "./IWNatDelegationFee.sol";
-import {IFtsoInflationConfigurations} from "./IFtsoInflationConfigurations.sol";
-import {IFtsoRewardOffersManager} from "./IFtsoRewardOffersManager.sol";
-import {IFtsoFeedDecimals} from "./IFtsoFeedDecimals.sol";
-import {IFtsoFeedPublisher} from "./IFtsoFeedPublisher.sol";
-import {IFtsoFeedIdConverter} from "./IFtsoFeedIdConverter.sol";
-import {IFastUpdateIncentiveManager} from "./IFastUpdateIncentiveManager.sol";
-import {IFastUpdater} from "./IFastUpdater.sol";
-import {IFastUpdatesConfiguration} from "./IFastUpdatesConfiguration.sol";
-import {IRNat} from "./IRNat.sol";
-import {IFeeCalculator} from "./IFeeCalculator.sol";
-import {FtsoV2Interface} from "./FtsoV2Interface.sol";
-import {TestFtsoV2Interface} from "./TestFtsoV2Interface.sol";
-import {ProtocolsV2Interface} from "./ProtocolsV2Interface.sol";
-import {RandomNumberV2Interface} from "./RandomNumberV2Interface.sol";
-import {RewardsV2Interface} from "./RewardsV2Interface.sol";
-import {IFdcVerification} from "./IFdcVerification.sol";
-import {IFdcHub} from "./IFdcHub.sol";
-import {IFdcRequestFeeConfigurations} from "./IFdcRequestFeeConfigurations.sol";
-import {IJsonApiVerification} from "./IJsonApiVerification.sol";
-import {IWeb2JsonVerification} from "./IWeb2JsonVerification.sol";
+import { IPriceSubmitter } from "./IPriceSubmitter.sol";
+import { IGovernanceSettings } from "./IGovernanceSettings.sol";
+import { IFtsoRewardManager } from "./IFtsoRewardManager.sol";
+import { IFtsoRegistry } from "./IFtsoRegistry.sol";
+import { IVoterWhitelister } from "./IVoterWhitelister.sol";
+import { IFtsoManager } from "./IFtsoManager.sol";
+import { IWNat } from "./IWNat.sol";
+import { IGovernanceVotePower } from "./IGovernanceVotePower.sol";
+import { IClaimSetupManager } from "./IClaimSetupManager.sol";
+import { IFlareAssetRegistry } from "./IFlareAssetRegistry.sol";
+import { IFlareContractRegistry } from "./IFlareContractRegistry.sol";
+import { ISubmission } from "./ISubmission.sol";
+import { IEntityManager } from "./IEntityManager.sol";
+import { IVoterRegistry } from "./IVoterRegistry.sol";
+import { IFlareSystemsCalculator } from "./IFlareSystemsCalculator.sol";
+import { IFlareSystemsManager } from "./IFlareSystemsManager.sol";
+import { IRewardManager } from "./IRewardManager.sol";
+import { IRelay } from "./IRelay.sol";
+import { IWNatDelegationFee } from "./IWNatDelegationFee.sol";
+import { IFtsoInflationConfigurations } from "./IFtsoInflationConfigurations.sol";
+import { IFtsoRewardOffersManager } from "./IFtsoRewardOffersManager.sol";
+import { IFtsoFeedDecimals } from "./IFtsoFeedDecimals.sol";
+import { IFtsoFeedPublisher } from "./IFtsoFeedPublisher.sol";
+import { IFtsoFeedIdConverter } from "./IFtsoFeedIdConverter.sol";
+import { IFastUpdateIncentiveManager } from "./IFastUpdateIncentiveManager.sol";
+import { IFastUpdater } from "./IFastUpdater.sol";
+import { IFastUpdatesConfiguration } from "./IFastUpdatesConfiguration.sol";
+import { IFeeCalculator } from "./IFeeCalculator.sol";
+import { FtsoV2Interface } from "./FtsoV2Interface.sol";
+import { TestFtsoV2Interface } from "./TestFtsoV2Interface.sol";
+import { ProtocolsV2Interface } from "./ProtocolsV2Interface.sol";
+import { RandomNumberV2Interface } from "./RandomNumberV2Interface.sol";
+import { RewardsV2Interface } from "./RewardsV2Interface.sol";
+import { IFdcVerification } from "./IFdcVerification.sol";
+import { IFdcHub } from "./IFdcHub.sol";
+import { IFdcRequestFeeConfigurations } from "./IFdcRequestFeeConfigurations.sol";
+import { IAssetManagerController } from "./IAssetManagerController.sol";
+import { IAssetManager } from "./IAssetManager.sol";
+import { IJsonApiVerification } from "./IJsonApiVerification.sol";
+import { IGenericRewardManager } from "./IGenericRewardManager.sol";
 // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
 
 // Library is intended to be used inline, so the strings are all memory allocated (instead of calldata)
@@ -113,14 +105,18 @@ library ContractRegistry {
     }
 
     // Nice typed getters for all the important contracts
-    // AUTO GENERATED - DO NOT EDIT BELOW THIS LINE
-    function getPriceSubmitter() internal view returns (IPriceSubmitter) {
+// AUTO GENERATED - DO NOT EDIT BELOW THIS LINE
+    function getPriceSubmitter()
+        internal
+        view
+        returns (IPriceSubmitter)
+    {
         return
             IPriceSubmitter(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("PriceSubmitter"))
-                )
-            );
+                keccak256(abi.encode("PriceSubmitter"))
+            )
+        );
     }
 
     function getGovernanceSettings()
@@ -131,67 +127,74 @@ library ContractRegistry {
         return
             IGovernanceSettings(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("GovernanceSettings"))
-                )
-            );
+                keccak256(abi.encode("GovernanceSettings"))
+            )
+        );
     }
 
-    function getFtsoRewardManager() internal view returns (IFtsoRewardManager) {
+    function getFtsoRewardManager()
+        internal
+        view
+        returns (IFtsoRewardManager)
+    {
         return
             IFtsoRewardManager(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FtsoRewardManager"))
-                )
-            );
+                keccak256(abi.encode("FtsoRewardManager"))
+            )
+        );
     }
 
-    function getFtsoRegistry() internal view returns (IFtsoRegistry) {
+    function getFtsoRegistry()
+        internal
+        view
+        returns (IFtsoRegistry)
+    {
         return
             IFtsoRegistry(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FtsoRegistry"))
-                )
-            );
+                keccak256(abi.encode("FtsoRegistry"))
+            )
+        );
     }
 
-    function getVoterWhitelister() internal view returns (IVoterWhitelister) {
+    function getVoterWhitelister()
+        internal
+        view
+        returns (IVoterWhitelister)
+    {
         return
             IVoterWhitelister(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("VoterWhitelister"))
-                )
-            );
+                keccak256(abi.encode("VoterWhitelister"))
+            )
+        );
     }
 
-    function getDistributionToDelegators()
+    function getFtsoManager()
         internal
         view
-        returns (IDistributionToDelegators)
+        returns (IFtsoManager)
     {
-        return
-            IDistributionToDelegators(
-                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("DistributionToDelegators"))
-                )
-            );
-    }
-
-    function getFtsoManager() internal view returns (IFtsoManager) {
         return
             IFtsoManager(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FtsoManager"))
-                )
-            );
+                keccak256(abi.encode("FtsoManager"))
+            )
+        );
     }
 
-    function getWNat() internal view returns (IWNat) {
+    function getWNat()
+        internal
+        view
+        returns (IWNat)
+    {
         return
             IWNat(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("WNat"))
-                )
-            );
+                keccak256(abi.encode("WNat"))
+            )
+        );
     }
 
     function getGovernanceVotePower()
@@ -202,31 +205,22 @@ library ContractRegistry {
         return
             IGovernanceVotePower(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("GovernanceVotePower"))
-                )
-            );
+                keccak256(abi.encode("GovernanceVotePower"))
+            )
+        );
     }
 
-    function getClaimSetupManager() internal view returns (IClaimSetupManager) {
+    function getClaimSetupManager()
+        internal
+        view
+        returns (IClaimSetupManager)
+    {
         return
             IClaimSetupManager(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("ClaimSetupManager"))
-                )
-            );
-    }
-
-    function getValidatorRewardManager()
-        internal
-        view
-        returns (IGenericRewardManager)
-    {
-        return
-            IGenericRewardManager(
-                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("ValidatorRewardManager"))
-                )
-            );
+                keccak256(abi.encode("ClaimSetupManager"))
+            )
+        );
     }
 
     function getFlareAssetRegistry()
@@ -237,18 +231,9 @@ library ContractRegistry {
         return
             IFlareAssetRegistry(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FlareAssetRegistry"))
-                )
-            );
-    }
-
-    function getValidatorRegistry() internal view returns (IValidatorRegistry) {
-        return
-            IValidatorRegistry(
-                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("ValidatorRegistry"))
-                )
-            );
+                keccak256(abi.encode("FlareAssetRegistry"))
+            )
+        );
     }
 
     function getFlareContractRegistry()
@@ -259,80 +244,48 @@ library ContractRegistry {
         return
             IFlareContractRegistry(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FlareContractRegistry"))
-                )
-            );
+                keccak256(abi.encode("FlareContractRegistry"))
+            )
+        );
     }
 
-    function getAddressBinder() internal view returns (IAddressBinder) {
-        return
-            IAddressBinder(
-                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("AddressBinder"))
-                )
-            );
-    }
-
-    function getPChainStakeMirror() internal view returns (IPChainStakeMirror) {
-        return
-            IPChainStakeMirror(
-                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("PChainStakeMirror"))
-                )
-            );
-    }
-
-    function getPChainStakeMirrorVerifier()
+    function getSubmission()
         internal
         view
-        returns (IPChainStakeMirrorVerifier)
+        returns (ISubmission)
     {
-        return
-            IPChainStakeMirrorVerifier(
-                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("PChainStakeMirrorVerifier"))
-                )
-            );
-    }
-
-    function getPChainStakeMirrorMultiSigVoting()
-        internal
-        view
-        returns (IPChainStakeMirrorMultiSigVoting)
-    {
-        return
-            IPChainStakeMirrorMultiSigVoting(
-                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("PChainStakeMirrorMultiSigVoting"))
-                )
-            );
-    }
-
-    function getSubmission() internal view returns (ISubmission) {
         return
             ISubmission(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("Submission"))
-                )
-            );
+                keccak256(abi.encode("Submission"))
+            )
+        );
     }
 
-    function getEntityManager() internal view returns (IEntityManager) {
+    function getEntityManager()
+        internal
+        view
+        returns (IEntityManager)
+    {
         return
             IEntityManager(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("EntityManager"))
-                )
-            );
+                keccak256(abi.encode("EntityManager"))
+            )
+        );
     }
 
-    function getVoterRegistry() internal view returns (IVoterRegistry) {
+    function getVoterRegistry()
+        internal
+        view
+        returns (IVoterRegistry)
+    {
         return
             IVoterRegistry(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("VoterRegistry"))
-                )
-            );
+                keccak256(abi.encode("VoterRegistry"))
+            )
+        );
     }
 
     function getFlareSystemsCalculator()
@@ -343,9 +296,9 @@ library ContractRegistry {
         return
             IFlareSystemsCalculator(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FlareSystemsCalculator"))
-                )
-            );
+                keccak256(abi.encode("FlareSystemsCalculator"))
+            )
+        );
     }
 
     function getFlareSystemsManager()
@@ -356,36 +309,48 @@ library ContractRegistry {
         return
             IFlareSystemsManager(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FlareSystemsManager"))
-                )
-            );
+                keccak256(abi.encode("FlareSystemsManager"))
+            )
+        );
     }
 
-    function getRewardManager() internal view returns (IRewardManager) {
+    function getRewardManager()
+        internal
+        view
+        returns (IRewardManager)
+    {
         return
             IRewardManager(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("RewardManager"))
-                )
-            );
+                keccak256(abi.encode("RewardManager"))
+            )
+        );
     }
 
-    function getRelay() internal view returns (IRelay) {
+    function getRelay()
+        internal
+        view
+        returns (IRelay)
+    {
         return
             IRelay(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("Relay"))
-                )
-            );
+                keccak256(abi.encode("Relay"))
+            )
+        );
     }
 
-    function getWNatDelegationFee() internal view returns (IWNatDelegationFee) {
+    function getWNatDelegationFee()
+        internal
+        view
+        returns (IWNatDelegationFee)
+    {
         return
             IWNatDelegationFee(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("WNatDelegationFee"))
-                )
-            );
+                keccak256(abi.encode("WNatDelegationFee"))
+            )
+        );
     }
 
     function getFtsoInflationConfigurations()
@@ -396,9 +361,9 @@ library ContractRegistry {
         return
             IFtsoInflationConfigurations(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FtsoInflationConfigurations"))
-                )
-            );
+                keccak256(abi.encode("FtsoInflationConfigurations"))
+            )
+        );
     }
 
     function getFtsoRewardOffersManager()
@@ -409,27 +374,35 @@ library ContractRegistry {
         return
             IFtsoRewardOffersManager(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FtsoRewardOffersManager"))
-                )
-            );
+                keccak256(abi.encode("FtsoRewardOffersManager"))
+            )
+        );
     }
 
-    function getFtsoFeedDecimals() internal view returns (IFtsoFeedDecimals) {
+    function getFtsoFeedDecimals()
+        internal
+        view
+        returns (IFtsoFeedDecimals)
+    {
         return
             IFtsoFeedDecimals(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FtsoFeedDecimals"))
-                )
-            );
+                keccak256(abi.encode("FtsoFeedDecimals"))
+            )
+        );
     }
 
-    function getFtsoFeedPublisher() internal view returns (IFtsoFeedPublisher) {
+    function getFtsoFeedPublisher()
+        internal
+        view
+        returns (IFtsoFeedPublisher)
+    {
         return
             IFtsoFeedPublisher(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FtsoFeedPublisher"))
-                )
-            );
+                keccak256(abi.encode("FtsoFeedPublisher"))
+            )
+        );
     }
 
     function getFtsoFeedIdConverter()
@@ -440,9 +413,9 @@ library ContractRegistry {
         return
             IFtsoFeedIdConverter(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FtsoFeedIdConverter"))
-                )
-            );
+                keccak256(abi.encode("FtsoFeedIdConverter"))
+            )
+        );
     }
 
     function getFastUpdateIncentiveManager()
@@ -453,18 +426,22 @@ library ContractRegistry {
         return
             IFastUpdateIncentiveManager(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FastUpdateIncentiveManager"))
-                )
-            );
+                keccak256(abi.encode("FastUpdateIncentiveManager"))
+            )
+        );
     }
 
-    function getFastUpdater() internal view returns (IFastUpdater) {
+    function getFastUpdater()
+        internal
+        view
+        returns (IFastUpdater)
+    {
         return
             IFastUpdater(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FastUpdater"))
-                )
-            );
+                keccak256(abi.encode("FastUpdater"))
+            )
+        );
     }
 
     function getFastUpdatesConfiguration()
@@ -475,54 +452,61 @@ library ContractRegistry {
         return
             IFastUpdatesConfiguration(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FastUpdatesConfiguration"))
-                )
-            );
+                keccak256(abi.encode("FastUpdatesConfiguration"))
+            )
+        );
     }
 
-    function getRNat() internal view returns (IRNat) {
-        return
-            IRNat(
-                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("RNat"))
-                )
-            );
-    }
-
-    function getFeeCalculator() internal view returns (IFeeCalculator) {
+    function getFeeCalculator()
+        internal
+        view
+        returns (IFeeCalculator)
+    {
         return
             IFeeCalculator(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FeeCalculator"))
-                )
-            );
+                keccak256(abi.encode("FeeCalculator"))
+            )
+        );
     }
 
-    function getFtsoV2() internal view returns (FtsoV2Interface) {
+    function getFtsoV2()
+        internal
+        view
+        returns (FtsoV2Interface)
+    {
         return
             FtsoV2Interface(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FtsoV2"))
-                )
-            );
+                keccak256(abi.encode("FtsoV2"))
+            )
+        );
     }
 
-    function getTestFtsoV2() internal view returns (TestFtsoV2Interface) {
+    function getTestFtsoV2()
+        internal
+        view
+        returns (TestFtsoV2Interface)
+    {
         return
             TestFtsoV2Interface(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FtsoV2"))
-                )
-            );
+                keccak256(abi.encode("FtsoV2"))
+            )
+        );
     }
 
-    function getProtocolsV2() internal view returns (ProtocolsV2Interface) {
+    function getProtocolsV2()
+        internal
+        view
+        returns (ProtocolsV2Interface)
+    {
         return
             ProtocolsV2Interface(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("ProtocolsV2"))
-                )
-            );
+                keccak256(abi.encode("ProtocolsV2"))
+            )
+        );
     }
 
     function getRandomNumberV2()
@@ -533,36 +517,48 @@ library ContractRegistry {
         return
             RandomNumberV2Interface(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("RandomNumberV2"))
-                )
-            );
+                keccak256(abi.encode("RandomNumberV2"))
+            )
+        );
     }
 
-    function getRewardsV2() internal view returns (RewardsV2Interface) {
+    function getRewardsV2()
+        internal
+        view
+        returns (RewardsV2Interface)
+    {
         return
             RewardsV2Interface(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("RewardsV2"))
-                )
-            );
+                keccak256(abi.encode("RewardsV2"))
+            )
+        );
     }
 
-    function getFdcVerification() internal view returns (IFdcVerification) {
+    function getFdcVerification()
+        internal
+        view
+        returns (IFdcVerification)
+    {
         return
             IFdcVerification(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FdcVerification"))
-                )
-            );
+                keccak256(abi.encode("FdcVerification"))
+            )
+        );
     }
 
-    function getFdcHub() internal view returns (IFdcHub) {
+    function getFdcHub()
+        internal
+        view
+        returns (IFdcHub)
+    {
         return
             IFdcHub(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FdcHub"))
-                )
-            );
+                keccak256(abi.encode("FdcHub"))
+            )
+        );
     }
 
     function getFdcRequestFeeConfigurations()
@@ -573,29 +569,60 @@ library ContractRegistry {
         return
             IFdcRequestFeeConfigurations(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
-                    keccak256(abi.encode("FdcRequestFeeConfigurations"))
-                )
-            );
+                keccak256(abi.encode("FdcRequestFeeConfigurations"))
+            )
+        );
     }
 
-    // Returns hardcoded unofficial deployment instances of Flare core contracts
+    function getAssetManagerController()
+        internal
+        view
+        returns (IAssetManagerController)
+    {
+        return
+            IAssetManagerController(
+                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
+                keccak256(abi.encode("AssetManagerController"))
+            )
+        );
+    }
+
+    function getAssetManagerFXRP()
+        internal
+        view
+        returns (IAssetManager)
+    {
+        return
+            IAssetManager(
+                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
+                keccak256(abi.encode("AssetManagerFXRP"))
+            )
+        );
+    }
+
     function auxiliaryGetIJsonApiVerification()
         internal
         pure
         returns (IJsonApiVerification)
     {
-        return IJsonApiVerification(0x07ad8508C9173DC845817472Ca0484035AbFA3c8);
+        return
+            IJsonApiVerification(
+    0x07ad8508C9173DC845817472Ca0484035AbFA3c8
+        );
     }
 
-    // Returns hardcoded unofficial deployment instances of Flare core contracts
-    function auxiliaryGetIWeb2JsonVerification()
+    function getValidatorRewardManager()
         internal
-        pure
-        returns (IWeb2JsonVerification)
+        view
+        returns (IGenericRewardManager)
     {
         return
-            IWeb2JsonVerification(0x906507E0B64bcD494Db73bd0459d1C667e14B933);
+            IGenericRewardManager(
+                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
+                keccak256(abi.encode("ValidatorRewardManager"))
+            )
+        );
     }
 
-    // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
+// END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
 }
