@@ -181,7 +181,7 @@ interface IAssetManager is
         returns (CollateralType.Data memory);
 
     /**
-     * Get the list of all available and deprecated tokens used for collateral.
+     * Get the list of all available tokens used for collateral.
      */
     function getCollateralTypes()
         external view
@@ -282,16 +282,6 @@ interface IAssetManager is
     function executeAgentSettingUpdate(
         address _agentVault,
         string memory _name
-    ) external;
-
-    /**
-     * When current pool collateral token contract (WNat) is replaced by the method setPoolWNatCollateralType,
-     * pools don't switch automatically. Instead, the agent must call this method that swaps old WNat tokens for
-     * new ones and sets it for use by the pool.
-     * NOTE: may only be called by the agent vault owner.
-     */
-    function upgradeWNatContract(
-        address _agentVault
     ) external;
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -613,6 +603,25 @@ interface IAssetManager is
      */
     function mintingPaymentDefault(
         IReferencedPaymentNonexistence.Proof calldata _proof,
+        uint256 _collateralReservationId
+    ) external;
+
+    /**
+     * The minter can make several mistakes in the underlying payment:
+     * - the payment is too late and is already defaulted before executing
+     * - the payment is too small so executeMinting reverts
+     * - the payment is performed twice
+     * In all of these cases the paid amount ends up on the agent vault's underlying account, but it is not
+     * confirmed and therefore the agent cannot withdraw it without triggering full liquidation (of course
+     * the agent can legally withdraw it once the vault is closed).
+     * This method enables the agent to confirm such payments, converting the deposited amount to agent's
+     * free underlying.
+     * NOTE: may only be called by the agent vault owner.
+     * @param _payment proof of the underlying payment (must have correct payment reference)
+     * @param _collateralReservationId collateral reservation id
+     */
+    function confirmClosedMintingPayment(
+        IPayment.Proof calldata _payment,
         uint256 _collateralReservationId
     ) external;
 
