@@ -98,14 +98,18 @@ interface IPersonalAccount {
      * @notice Emitted when a redeem request is made.
      * @param vault The vault address.
      * @param shares The number of shares to redeem.
-     * @param amount The amount to redeem.
      * @param claimableEpoch The epoch when the claim becomes available.
+     * @param year The year of the claimable date.
+     * @param month The month of the claimable date.
+     * @param day The day of the claimable date.
      */
     event RedeemRequested(
         address indexed vault,
         uint256 shares,
-        uint256 amount,
-        uint256 claimableEpoch
+        uint256 claimableEpoch,
+        uint256 year,
+        uint256 month,
+        uint256 day
     );
 
     /**

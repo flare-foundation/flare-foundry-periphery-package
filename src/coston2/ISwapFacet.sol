@@ -10,17 +10,23 @@ interface ISwapFacet {
     /**
      * @notice Emitted when swap parameters are set.
      * @param uniswapV3Router The Uniswap V3 router address.
-     * @param usdt0 USDT0 token address.
-     * @param wNatUsdt0PoolFeeTierPPM The WNAT/USDT0 pool fee tier (in PPM - supported values: 100, 500, 3000, 10000).
-     * @param usdt0FXrpPoolFeeTierPPM The USDT0/FXRP pool fee tier (in PPM - supported values: 100, 500, 3000, 10000).
+     * @param stableCoin StableCoin (USDT0, USDX,...) token address.
+     * @param wNatStableCoinPoolFeeTierPPM The WNAT/StableCoin pool fee tier
+              (in PPM - supported values: 100, 500, 3000, 10000).
+     * @param stableCoinFXrpPoolFeeTierPPM The StableCoin/FXRP pool fee tier
+              (in PPM - supported values: 100, 500, 3000, 10000).
      * @param maxSlippagePPM The maximum slippage allowed for swaps (in PPM).
+     * @param stableCoinUsdFeedId The StableCoin/USD feed ID as in FTSO.
+     * @param wNatUsdFeedId The WNAT/USD feed ID as in FTSO.
      */
     event SwapParamsSet(
         address uniswapV3Router,
-        address usdt0,
-        uint24 wNatUsdt0PoolFeeTierPPM,
-        uint24 usdt0FXrpPoolFeeTierPPM,
-        uint24 maxSlippagePPM
+        address stableCoin,
+        uint24 wNatStableCoinPoolFeeTierPPM,
+        uint24 stableCoinFXrpPoolFeeTierPPM,
+        uint24 maxSlippagePPM,
+        bytes21 stableCoinUsdFeedId,
+        bytes21 wNatUsdFeedId
     );
 
     /**
@@ -52,9 +58,14 @@ interface ISwapFacet {
     error InvalidPoolFeeTierPPM();
 
     /**
-     * @notice Reverts if the USDT0 token address is invalid.
+     * @notice Reverts if the feed ID is invalid (cannot be zero).
      */
-    error InvalidUsdt0();
+    error InvalidFeedId();
+
+    /**
+     * @notice Reverts if the StableCoin (USDT0, USDX,...) token address is invalid.
+     */
+    error InvalidStableCoin();
 
     /**
      * @notice Reverts if the maximum slippage in PPM is invalid (must be less than or equal to 1e6).
@@ -62,19 +73,21 @@ interface ISwapFacet {
     error InvalidMaxSlippagePPM();
 
     /**
-     * @notice Swaps WNAT for USDT0 for the personal account associated with the given XRPL address.
+     * @notice Swaps WNAT for StableCoin (USDT0, USDX,...) for the personal account
+               associated with the given XRPL address.
      * @param _xrplAddress The XRPL address of the personal account.
      */
-    function swapWNatForUsdt0(
+    function swapWNatForStableCoin(
         string calldata _xrplAddress
     )
         external;
 
     /**
-     * @notice Swaps USDT0 for FAsset for the personal account associated with the given XRPL address.
+     * @notice Swaps StableCoin (USDT0, USDX,...) for FAsset for the personal account
+               associated with the given XRPL address.
      * @param _xrplAddress The XRPL address of the personal account.
      */
-    function swapUsdt0ForFAsset(
+    function swapStableCoinForFAsset(
         string calldata _xrplAddress
     )
         external;
@@ -82,18 +95,22 @@ interface ISwapFacet {
     /**
      * Returns the swap parameters.
      * @return _uniswapV3Router The Uniswap V3 router address.
-     * @return _usdt0 USDT0 token address.
-     * @return _wNatUsdt0PoolFeeTierPPM The WNAT/USDT0 pool fee tier (in PPM).
-     * @return _usdt0FXrpPoolFeeTierPPM The USDT0/FXRP pool fee tier (in PPM).
+     * @return _stableCoin StableCoin (USDT0, USDX,...) token address.
+     * @return _wNatStableCoinPoolFeeTierPPM The WNAT/StableCoin pool fee tier (in PPM).
+     * @return _stableCoinFXrpPoolFeeTierPPM The StableCoin/FXRP pool fee tier (in PPM).
      * @return _maxSlippagePPM The maximum slippage allowed for swaps (in PPM).
+     * @return _stableCoinUsdFeedId The StableCoin/USD feed ID as in FTSO.
+     * @return _wNatUsdFeedId The WNAT/USD feed ID as in FTSO.
      */
     function getSwapParams()
         external view
         returns (
             address _uniswapV3Router,
-            address _usdt0,
-            uint24 _wNatUsdt0PoolFeeTierPPM,
-            uint24 _usdt0FXrpPoolFeeTierPPM,
-            uint24 _maxSlippagePPM
+            address _stableCoin,
+            uint24 _wNatStableCoinPoolFeeTierPPM,
+            uint24 _stableCoinFXrpPoolFeeTierPPM,
+            uint24 _maxSlippagePPM,
+            bytes21 _stableCoinUsdFeedId,
+            bytes21 _wNatUsdFeedId
         );
 }
