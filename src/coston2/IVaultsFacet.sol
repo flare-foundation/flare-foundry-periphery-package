@@ -20,6 +20,18 @@ interface IVaultsFacet {
     );
 
     /**
+     * @notice Emitted when a vault is removed.
+     * @param vaultId The vault ID.
+     * @param vaultAddress The vault address.
+     * @param vaultType The vault type (e.g., 1 = Firelight, 2 = Upshift).
+     */
+    event VaultRemoved(
+        uint256 indexed vaultId,
+        address indexed vaultAddress,
+        uint8 indexed vaultType
+    );
+
+    /**
      * @notice Reverts if array lengths do not match.
      */
     error VaultsLengthsMismatch();

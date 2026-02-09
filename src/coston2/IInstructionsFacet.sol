@@ -2,6 +2,7 @@
 pragma solidity >=0.8.4 <0.9;
 
 import {IPayment} from "./IPayment.sol";
+import {ICustomInstructionsFacet} from "./ICustomInstructionsFacet.sol";
 
 /**
  * @title IInstructionsFacet
@@ -174,6 +175,18 @@ interface IInstructionsFacet {
     );
 
     /**
+     * @notice Emitted when a custom instruction is executed.
+     * @param personalAccount The personal account address.
+     * @param callHash The call hash of the custom instruction.
+     * @param customInstruction The custom instruction.
+     */
+    event CustomInstructionExecuted(
+        address indexed personalAccount,
+        bytes32 indexed callHash,
+        ICustomInstructionsFacet.CustomCall[] customInstruction
+    );
+
+    /**
      * @notice Reverts if the payment amount is invalid.
      * @param requiredAmount The required payment amount.
      */
@@ -238,6 +251,11 @@ interface IInstructionsFacet {
      * @notice Reverts if the minter is invalid.
      */
     error InvalidMinter();
+
+    /**
+     * @notice Reverts if the provided custom instruction hash is invalid (not registered).
+     */
+    error InvalidCustomInstructionHash();
 
     /**
      * @notice Reserve collateral for minting operation.
