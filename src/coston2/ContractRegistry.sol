@@ -43,6 +43,7 @@ import { IAssetManagerController } from "./IAssetManagerController.sol";
 import { IAssetManager } from "./IAssetManager.sol";
 import { IJsonApiVerification } from "./IJsonApiVerification.sol";
 import { IGenericRewardManager } from "./IGenericRewardManager.sol";
+import { IMasterAccountController } from "./IMasterAccountController.sol";
 // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
 
 // Library is intended to be used inline, so the strings are all memory allocated (instead of calldata)
@@ -620,6 +621,19 @@ library ContractRegistry {
             IGenericRewardManager(
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
                 keccak256(abi.encode("ValidatorRewardManager"))
+            )
+        );
+    }
+
+    function getMasterAccountController()
+        internal
+        view
+        returns (IMasterAccountController)
+    {
+        return
+            IMasterAccountController(
+                FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
+                keccak256(abi.encode("MasterAccountController"))
             )
         );
     }
