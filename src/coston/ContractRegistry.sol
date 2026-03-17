@@ -41,7 +41,6 @@ import { IFdcHub } from "./IFdcHub.sol";
 import { IFdcRequestFeeConfigurations } from "./IFdcRequestFeeConfigurations.sol";
 import { IAssetManagerController } from "./IAssetManagerController.sol";
 import { IAssetManager } from "./IAssetManager.sol";
-import { IJsonApiVerification } from "./IJsonApiVerification.sol";
 // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
 
 // Library is intended to be used inline, so the strings are all memory allocated (instead of calldata)
@@ -596,17 +595,6 @@ library ContractRegistry {
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
                 keccak256(abi.encode("AssetManagerFXRP"))
             )
-        );
-    }
-
-    function auxiliaryGetIJsonApiVerification()
-        internal
-        pure
-        returns (IJsonApiVerification)
-    {
-        return
-            IJsonApiVerification(
-    0x206D83e3a24523De1E43Ab56AC8f7b9b10f6ab89
         );
     }
 
