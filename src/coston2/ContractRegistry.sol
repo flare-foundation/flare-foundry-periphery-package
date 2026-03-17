@@ -41,7 +41,6 @@ import { IFdcHub } from "./IFdcHub.sol";
 import { IFdcRequestFeeConfigurations } from "./IFdcRequestFeeConfigurations.sol";
 import { IAssetManagerController } from "./IAssetManagerController.sol";
 import { IAssetManager } from "./IAssetManager.sol";
-import { IJsonApiVerification } from "./IJsonApiVerification.sol";
 import { IGenericRewardManager } from "./IGenericRewardManager.sol";
 import { IMasterAccountController } from "./IMasterAccountController.sol";
 // END AUTO GENERATED - DO NOT EDIT ABOVE THIS LINE
@@ -598,17 +597,6 @@ library ContractRegistry {
                 FLARE_CONTRACT_REGISTRY.getContractAddressByHash(
                 keccak256(abi.encode("AssetManagerFXRP"))
             )
-        );
-    }
-
-    function auxiliaryGetIJsonApiVerification()
-        internal
-        pure
-        returns (IJsonApiVerification)
-    {
-        return
-            IJsonApiVerification(
-    0x07ad8508C9173DC845817472Ca0484035AbFA3c8
         );
     }
 

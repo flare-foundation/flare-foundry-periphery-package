@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.6 <0.9;
 
-import {IPayment} from ".//IFdcVerification.sol";
+import {IPayment} from ".//IPayment.sol";
 
 
 /**

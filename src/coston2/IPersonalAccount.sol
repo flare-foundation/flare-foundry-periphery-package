@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.4 <0.9;
 
+import {ICustomInstructionsFacet} from "./ICustomInstructionsFacet.sol";
+
 /**
  * @title IPersonalAccount
  * @notice Interface for PersonalAccount contract.
@@ -145,6 +147,14 @@ interface IPersonalAccount {
     );
 
     /**
+     * @notice Emitted when a custom instruction is executed.
+     * @param customInstruction The custom instruction.
+     */
+    event CustomInstructionExecuted(
+        ICustomInstructionsFacet.CustomCall[] indexed customInstruction
+    );
+
+    /**
      * @notice Reverts if the sent value is insufficient for collateral reservation.
      * @param collateralReservationFee The required collateral reservation fee.
      * @param executorFee The required executor fee.
@@ -191,6 +201,12 @@ interface IPersonalAccount {
      * @notice Reverts if the token approval fails.
      */
     error ApprovalFailed();
+
+    /**
+     * @notice Reverts if the custom call fails.
+     * @param customCall The custom call that failed.
+     */
+    error CustomInstructionCallFailed(ICustomInstructionsFacet.CustomCall customCall);
 
     /**
      * @notice Returns the XRPL owner address associated with this personal account.

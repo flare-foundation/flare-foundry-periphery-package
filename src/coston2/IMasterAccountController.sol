@@ -16,6 +16,7 @@ import {ISwapFacet} from "./ISwapFacet.sol";
 import {ITimelockFacet} from "./ITimelockFacet.sol";
 import {IVaultsFacet} from "./IVaultsFacet.sol";
 import {IXrplProviderWalletsFacet} from "./IXrplProviderWalletsFacet.sol";
+import {ICustomInstructionsFacet} from "./ICustomInstructionsFacet.sol";
 
 /**
  * @title IMasterAccountController
@@ -36,5 +37,6 @@ interface IMasterAccountController is
     ISwapFacet,
     ITimelockFacet,
     IVaultsFacet,
-    IXrplProviderWalletsFacet
+    IXrplProviderWalletsFacet,
+    ICustomInstructionsFacet
 {}
