@@ -7,6 +7,12 @@ pragma solidity >=0.8.4 <0.9;
  */
 interface IVaultsFacet {
 
+    enum VaultType {
+        None,      // 0 — invalid/unset
+        Firelight, // 1
+        Upshift    // 2
+    }
+
     /**
      * @notice Emitted when a vault is added.
      * @param vaultId The vault ID.
@@ -16,7 +22,7 @@ interface IVaultsFacet {
     event VaultAdded(
         uint256 indexed vaultId,
         address indexed vaultAddress,
-        uint8 indexed vaultType
+        VaultType indexed vaultType
     );
 
     /**
@@ -69,7 +75,7 @@ interface IVaultsFacet {
      * @param vaultType The vault type.
      */
     error InvalidVaultType(
-        uint8 vaultType
+        VaultType vaultType
     );
 
     /**
@@ -80,5 +86,9 @@ interface IVaultsFacet {
      */
     function getVaults()
         external view
-        returns (uint256[] memory _vaultIds, address[] memory _vaultAddresses, uint8[] memory _vaultTypes);
+        returns (
+            uint256[] memory _vaultIds,
+            address[] memory _vaultAddresses,
+            VaultType[] memory _vaultTypes
+        );
 }
