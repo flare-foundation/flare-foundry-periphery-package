@@ -10,11 +10,13 @@ import {IAgentVaultsFacet} from "./IAgentVaultsFacet.sol";
 import {IExecutorsFacet} from "./IExecutorsFacet.sol";
 import {IInstructionFeesFacet} from "./IInstructionFeesFacet.sol";
 import {IInstructionsFacet} from "./IInstructionsFacet.sol";
+import {IMemoInstructionsFacet} from "./IMemoInstructionsFacet.sol";
 import {IPaymentProofsFacet} from "./IPaymentProofsFacet.sol";
 import {IPersonalAccountsFacet} from "./IPersonalAccountsFacet.sol";
-import {ISwapFacet} from "./ISwapFacet.sol";
+import {IReaderFacet} from "./IReaderFacet.sol";
 import {ITimelockFacet} from "./ITimelockFacet.sol";
 import {IVaultsFacet} from "./IVaultsFacet.sol";
+import {IPauseFacet} from "./IPauseFacet.sol";
 import {IXrplProviderWalletsFacet} from "./IXrplProviderWalletsFacet.sol";
 
 /**
@@ -31,9 +33,11 @@ interface IMasterAccountController is
     IExecutorsFacet,
     IInstructionFeesFacet,
     IInstructionsFacet,
+    IMemoInstructionsFacet,
+    IPauseFacet,
     IPaymentProofsFacet,
     IPersonalAccountsFacet,
-    ISwapFacet,
+    IReaderFacet,
     ITimelockFacet,
     IVaultsFacet,
     IXrplProviderWalletsFacet

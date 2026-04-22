@@ -6,6 +6,15 @@ pragma solidity >=0.8.4 <0.9;
  * @notice Interface for PersonalAccount contract.
  */
 interface IPersonalAccount {
+    /// @notice Struct containing call information for executeUserOp
+    struct Call {
+        /// @notice Target contract address
+        address target;
+        /// @notice value (in wei) to send with the call
+        uint256 value;
+        /// @notice Call data
+        bytes data;
+    }
     /**
      * @notice Emitted when collateral is reserved for minting.
      * @param agentVault The agent vault address.
@@ -131,20 +140,6 @@ interface IPersonalAccount {
     );
 
     /**
-     * @notice Emitted when a token swap is executed.
-     * @param tokenIn The input token address.
-     * @param tokenOut The output token address.
-     * @param amountIn The amount of input tokens.
-     * @param amountOut The amount of output tokens received.
-     */
-    event SwapExecuted(
-        address indexed tokenIn,
-        address indexed tokenOut,
-        uint256 amountIn,
-        uint256 amountOut
-    );
-
-    /**
      * @notice Reverts if the sent value is insufficient for collateral reservation.
      * @param collateralReservationFee The required collateral reservation fee.
      * @param executorFee The required executor fee.
@@ -191,6 +186,13 @@ interface IPersonalAccount {
      * @notice Reverts if the token approval fails.
      */
     error ApprovalFailed();
+
+    /**
+     * @notice Reverts if a call in executeUserOp fails.
+     * @param index The index of the call that failed.
+     * @param returnData The return data from the failed call.
+     */
+    error CallFailed(uint256 index, bytes returnData);
 
     /**
      * @notice Returns the XRPL owner address associated with this personal account.
