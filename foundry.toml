@@ -1,6 +1,6 @@
 [package]
 name = "flare-periphery"
-version = "0.1.46"
+version = "0.1.47"
 
 [profile.default]
 src = "src"
@@ -10,6 +10,7 @@ libs = ["lib", "dependencies"]
 [dependencies]
 "@openzeppelin-contracts" = "5.2.0-rc.1"
 "@layerzerolabs-lz-evm-protocol-v2" = "3.0.165"
+"@openzeppelin-contracts-upgradeable" = "4.6.0"
 
 [soldeer]
 # Whether Soldeer manages remappings
