@@ -195,6 +195,15 @@ interface IPersonalAccount {
     error CallFailed(uint256 index, bytes returnData);
 
     /**
+     * @notice Execute a series of calls (user operation).
+     * @param _calls Array of calls to execute.
+     */
+    function executeUserOp(
+        Call[] calldata _calls
+    )
+        external payable;
+
+    /**
      * @notice Returns the XRPL owner address associated with this personal account.
      * @return The XRPL owner address
      */
