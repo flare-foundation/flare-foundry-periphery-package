@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.6 <0.9;
 
-import "../../IClaimSetupManager.sol";
-import "../../IWNat.sol";
+import { IClaimSetupManager } from "../../IClaimSetupManager.sol";
+import { IWNat } from "../../IWNat.sol";
 
 /**
  * Internal interface for the `ClaimSetupManager contract.
