@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.6 <0.9;
 
-import "../../IPollingManagementGroup.sol";
+import { IPollingManagementGroup } from "../../IPollingManagementGroup.sol";
 
 interface IIPollingManagementGroup is IPollingManagementGroup {
 
