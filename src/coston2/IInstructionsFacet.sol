@@ -201,7 +201,8 @@ interface IInstructionsFacet {
      * @param instructionType The invalid instruction type.
      */
     error InvalidInstructionType(
-        uint256 instructionType
+        uint256 instructionType,
+        uint256 expectedVaultType
     );
 
     /**
