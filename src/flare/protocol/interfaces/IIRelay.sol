@@ -2,11 +2,15 @@
 pragma solidity >=0.7.6 <0.9;
 
 import { IRelay } from "../../IRelay.sol";
+import { IOwnableWithTimelock } from "../../IOwnableWithTimelock.sol";
 
 /**
- * Relay internal interface.
+ * Relay internal interface: the trusted signing-policy setter path plus the owner-governance
+ * surface. Every owner setter is annotated `onlyOwnerWithTimelock` in the implementation —
+ * with a nonzero timelock duration a call queues for permissionless execution after its ETA
+ * (see IOwnableWithTimelock), with zero it applies immediately.
  */
-interface IIRelay is IRelay {
+interface IIRelay is IRelay, IOwnableWithTimelock {
 
     struct SigningPolicy {
         uint24 rewardEpochId;       // Reward epoch id.
@@ -22,12 +26,77 @@ interface IIRelay is IRelay {
                                     // while approximately keeping the weight relations.
     }
 
+    /// A verify() fee-exemption update entry for `setFeeExemptions`.
+    struct FeeExemption {
+        address account;    // The account whose exemption is set.
+        bool exempt;        // True grants the exemption, false revokes it.
+    }
+
     /**
      * Sets the signing policy.
      * @param _signingPolicy Signing policy.
      * @return Returns signing policy hash.
-     * @dev This method can only be called by the signing policy setter.
+     * @dev This method can only be called by the signing policy setter (on Flare: FlareSystemsManager),
+     *      which is trusted. The signing policy setter MUST ensure the signing policy is well-formed; in
+     *      particular it MUST guarantee that there are no zero-address voters and no duplicate voters, that
+     *      the voters are given in the canonical order, and that the weights are correctly normalised.
+     *      These properties are intentionally NOT re-validated on-chain; correctness relies on
+     *      the trusted setter.
      */
     function setSigningPolicy(SigningPolicy memory _signingPolicy) external returns (bytes32);
+
+    /**
+     * Replaces the COMPLETE verify() fee configuration — the fee token and the entire fee
+     * table — in one atomic call. The previous table is cleared first, so a protocol not
+     * listed in `_feeConfigs` is free (fee 0) after the call; fees can never be silently
+     * carried over as amounts in a different denomination. The self-contained
+     * `ProtocolFeesSet(feeToken, feeConfigs)` event mirrors this: its latest occurrence fully
+     * describes the current fee state. Relay mode only — a setter-mode (home) deployment
+     * charges no fee and reverts with `FeeConfigNotAllowed`.
+     * @param _feeToken The ERC-20 the fee is paid in from now on; zero means native-coin
+     * fees. Must be a standard exact-transfer ERC-20 — fee-on-transfer or rebasing tokens are
+     * unsupported (verify() assumes the pull delivers exactly the fee).
+     * @param _feeConfigs The complete (protocolId, fee) table, denominated per `_feeToken`;
+     * every protocol id must be greater than 1 and unique (`DuplicateProtocolId`), and every
+     * fee nonzero (`ProtocolFeeZero` — a free protocol is expressed by omission).
+     */
+    function setProtocolFees(
+        address _feeToken,
+        FeeConfig[] calldata _feeConfigs
+    )
+        external;
+
+    /**
+     * Grants or revokes verify() fee exemptions (e.g. DVN adapters). Relay mode only — a
+     * setter-mode (home) deployment charges no fee and reverts with `FeeExemptionsNotAllowed`.
+     * @param _exemptions The (account, exempt) entries to apply; accounts must be nonzero.
+     */
+    function setFeeExemptions(
+        FeeExemption[] calldata _exemptions
+    )
+        external;
+
+    /**
+     * Points collected verify() fees at a new recipient. Relay mode only — a setter-mode
+     * (home) deployment collects no fees and reverts with `FeeConfigNotAllowed`.
+     * @param _feeCollectionAddress The new fee recipient; must be nonzero (a zero recipient
+     * would burn every collected fee).
+     */
+    function setFeeCollectionAddress(
+        address _feeCollectionAddress
+    )
+        external;
+
+    /**
+     * Repoints the trusted signing-policy setter (e.g. after a FlareSystemsManager
+     * redeployment). Setter mode only — the deployment mode is fixed at initialize, so a
+     * relay-mode deployment can never gain a setter (`SigningPolicySetterNotAllowed`) and a
+     * setter-mode one can never clear it (`SigningPolicySetterZero`).
+     * @param _signingPolicySetter The new signing-policy setter; must be nonzero.
+     */
+    function setSigningPolicySetter(
+        address _signingPolicySetter
+    )
+        external;
 
 }
