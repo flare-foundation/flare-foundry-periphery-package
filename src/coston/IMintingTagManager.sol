@@ -24,8 +24,22 @@ interface IMintingTagManager is IERC721EnumerableUpgradeable {
     /// Emitted when an allowed executor change is initiated (subject to cooldown delay).
     event AllowedExecutorChangePending(uint256 tag, address executor, uint256 activeAfterTs);
 
+    /// Emitted when a pending allowed executor change is cancelled before it activates.
+    /// This happens when the tag owner re-targets the currently-active executor
+    /// (e.g., resets to zero while the active executor is zero, or sets back to the
+    /// active executor while a change to another address is pending).
+    event AllowedExecutorChangeCancelled(uint256 tag);
+
+    /// Emitted when the allowed executor state (active and/or pending) is reset to zero
+    /// address on tag transfer. Unlike executor changes made by the tag owner, the reset
+    /// takes effect immediately, without the cooldown delay.
+    event AllowedExecutorCleared(uint256 tag);
+
     /// Emitted when the reservation fee or its recipient is changed by governance.
     event ReservationFeeChanged(uint256 reservationFee, address recipient);
+
+    /// Emitted when the cooldown delay for allowed executor changes is updated by governance.
+    event ExecutorChangeAfterSecondsChanged(uint256 executorChangeAfterSeconds);
 
     /**
      * Reserve a new minting tag by paying the reservation fee.
@@ -70,6 +84,18 @@ interface IMintingTagManager is IERC721EnumerableUpgradeable {
      * The fee (in native currency) required to reserve a new minting tag.
      */
     function reservationFee() external view returns (uint256);
+
+    /**
+     * The recipient that receives reservation fees paid when reserving minting tags.
+     */
+    function reservationFeeRecipient() external view returns (address payable);
+
+    /**
+     * The cooldown delay (in seconds) before a change to a tag's allowed executor becomes active.
+     * The delay must be longer than the time needed to obtain an FDC proof, so that an executor
+     * that has already paid for an FDC request cannot be locked out before they can use it.
+     */
+    function executorChangeAfterSeconds() external view returns (uint256);
 
     /**
      * Return all minting tag ids owned by the given address.
