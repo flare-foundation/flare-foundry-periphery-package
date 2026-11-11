@@ -10,6 +10,10 @@ import {IAgentVaultsFacet} from "./IAgentVaultsFacet.sol";
 import {IExecutorsFacet} from "./IExecutorsFacet.sol";
 import {IInstructionFeesFacet} from "./IInstructionFeesFacet.sol";
 import {IInstructionsFacet} from "./IInstructionsFacet.sol";
+import {IComposeTransportFacet} from "./IComposeTransportFacet.sol";
+import {ISubaccountsFacet} from "./ISubaccountsFacet.sol";
+import {IMorphoLoanMarketsFacet} from "./IMorphoLoanMarketsFacet.sol";
+import {IBridgeRoutesFacet} from "./IBridgeRoutesFacet.sol";
 import {IMemoInstructionsFacet} from "./IMemoInstructionsFacet.sol";
 import {IPaymentProofsFacet} from "./IPaymentProofsFacet.sol";
 import {IPersonalAccountsFacet} from "./IPersonalAccountsFacet.sol";
@@ -33,6 +37,10 @@ interface IMasterAccountController is
     IExecutorsFacet,
     IInstructionFeesFacet,
     IInstructionsFacet,
+    IComposeTransportFacet,
+    ISubaccountsFacet,
+    IMorphoLoanMarketsFacet,
+    IBridgeRoutesFacet,
     IMemoInstructionsFacet,
     IPauseFacet,
     IPaymentProofsFacet,
